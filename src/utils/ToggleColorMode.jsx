@@ -10,6 +10,10 @@ function ToggleColorMode({ children }) {
     setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
   };
 
+  const value = useMemo(() => ({
+    mode, setMode, toggleColorMode
+  }), [mode, toggleColorMode]);
+
   const theme = useMemo(() => createTheme({
     palette: {
       mode,
@@ -17,7 +21,7 @@ function ToggleColorMode({ children }) {
   }), [mode]);
 
   return (
-    <ColorModeContext.Provider value={{ mode, setMode, toggleColorMode }}>
+    <ColorModeContext.Provider value={value}>
       <ThemeProvider theme={theme}>
         {children}
       </ThemeProvider>
